@@ -16,7 +16,7 @@ class SimpleGame extends StateBasedGame("Title") {
     getCurrentState keyReleased(key, c)
   }
 
-  def toMainMenu() {
+  def enterMainMenu() {
     this.enterState(SimpleMenuState.ID, new FadeOutTransition(Color.black), new FadeInTransition(Color.black))
   }
 
