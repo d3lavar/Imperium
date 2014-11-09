@@ -4,6 +4,7 @@ import imperium.engine.core.state.{GameMapState, SimpleMenuState}
 import org.newdawn.slick._
 import org.newdawn.slick.state.StateBasedGame
 import org.newdawn.slick.state.transition.{FadeInTransition, FadeOutTransition}
+import org.newdawn.slick.tiled.TiledMap
 
 class SimpleGame extends StateBasedGame("Title") {
 
