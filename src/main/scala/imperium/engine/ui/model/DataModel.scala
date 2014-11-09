@@ -5,6 +5,4 @@ import org.newdawn.slick.Image
 /*
  * Created by DelavaR on 08.11.2014.
  */
-class DataModel(val imageActive: Image, val imageNormal: Image) {
-
-}
+case class DataModel(imageActive: Image, imageNormal: Image)

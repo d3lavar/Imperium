@@ -1,52 +1,47 @@
 package imperium.engine.core.position
 
+import org.newdawn.slick.geom.Point
+
 /*
  * Created by DelavaR on 08.11.2014.
  */
 
-object AreaPositioner {
+case class AreaPositioner(canvasWidth: Int,
+                          canvasHeight: Int,
+                          areaWidth: Int = 0,
+                          areaHeight: Int = 0,
+                          topOffset: Int = 0,
+                          bottomOffset: Int = 0,
+                          leftOffset: Int = 0,
+                          rightOffset: Int = 0,
+                          verticalAlign: VerticalAlignment = VerticalAlignment.TOP,
+                          horizontalAlign: HorizontalAlignment = HorizontalAlignment.LEFT) {
 
-  def apply(canvasWidth: Int, canvasHeight: Int) = new AreaPositioner(canvasWidth, canvasHeight)
+  def buildArea(): Area = Area(calculateTopPoint(), areaWidth, areaHeight)
 
-}
+  def buildTopPoint(): Point = calculateTopPoint()
 
-class AreaPositioner(val canvasWidth: Int, val canvasHeight: Int) {
-
-  private var areaWidth: Int = _
-  private var areaHeight: Int = _
-
-  private var topOffset: Int = _
-  private var bottomOffset: Int = _
-  private var leftOffset: Int = _
-  private var rightOffset: Int = _
-
-  private var verticalAlign = VerticalAlignment.TOP
-  private var horizontalAlign = HorizontalAlignment.LEFT
-
-  /*def areaWidth(width: Int) = {
-    width match {
-      case width if width > 0 => areaWidth = width
-      case _ => throw new IllegalArgumentException("Area width only accepts positive value.")
+  private def calculateTopPoint(): Point = {
+    var topPointX = -1
+    var topPointY = -1
+    horizontalAlign match {
+      case HorizontalAlignment.LEFT => topPointX = leftOffset
+      case HorizontalAlignment.RIGHT => topPointX = canvasWidth - rightOffset - areaWidth
+      case HorizontalAlignment.CENTER =>
+        val availableWidth = canvasWidth - rightOffset - leftOffset
+        val hCenteringOffset = (availableWidth / 2) - (areaWidth / 2)
+        topPointX = leftOffset + hCenteringOffset
     }
+    verticalAlign match {
+      case VerticalAlignment.TOP => topPointY = topOffset
+      case VerticalAlignment.BOTTOM => topPointY = canvasHeight - bottomOffset - areaHeight
+      case VerticalAlignment.CENTER =>
+        val availableHeight = canvasHeight - topOffset - bottomOffset
+        val vCenteringOffset = (availableHeight / 2) - (areaHeight / 2)
+        topPointY = topOffset + vCenteringOffset
+    }
+
+    new Point(topPointX, topPointY)
   }
-
-  def areaHeight(height: Int) = height match {
-    case height if height > 0 => areaHeight = height
-    case _ => throw new IllegalArgumentException("Area height only accepts positive value.")
-  }*/
-
-  /*  def areaHeight(height: Int) = height match {
-    case height if height > 0 => areaHeight = height
-    case _ => throw new IllegalArgumentException("Area height only accepts positive value.")
-  }
-
-    def areaHeight(height: Int) = height match {
-    case height if height > 0 => areaHeight = height
-    case _ => throw new IllegalArgumentException("Area height only accepts positive value.")
-  }*/
-
-
-
-
 
 }
