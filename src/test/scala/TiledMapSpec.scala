@@ -1,3 +1,4 @@
+import org.lwjgl.opengl.{DisplayMode, Display}
 import org.newdawn.slick.SlickException
 import org.newdawn.slick.tiled.TiledMap
 import org.scalatest._
@@ -6,11 +7,12 @@ import org.scalatest._
  * Created by DelavaR on 09.11.2014.
  */
 
-class TiledMapSpec extends FlatSpec with Matchers {
+class TiledMapSpec extends FlatSpec with Matchers with UISpec {
 
   val WRONG_PATH = "WRONG_PATH"
   val WRONG_FILE = "maps/invalid-map.tmx"
   val CORRECT_FILE = "maps/map.tmx"
+
 
   it should "throw RuntimeException if wrong path was passed to TiledMap constructor" in {
     a [RuntimeException] should be thrownBy {
@@ -24,6 +26,7 @@ class TiledMapSpec extends FlatSpec with Matchers {
     }
   }
 
-  //TODO: Init GL Context
-  //noException should be thrownBy new TiledMap(CORRECT_FILE)
+  noException should be thrownBy {
+      new TiledMap(CORRECT_FILE)
+  }
 }
