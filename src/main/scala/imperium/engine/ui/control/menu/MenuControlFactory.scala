@@ -58,7 +58,7 @@ object MenuControlFactory {
                                   areaHeight = imageHeight,
                                   topOffset = MENU_ELEMENTS_Y_MARGIN + offset,
                                   horizontalAlign = HorizontalAlignment.CENTER)
-      .buildTopPoint()
+      .topPoint
     new Area(topPoint, MENU_ELEMENTS_WIDTH, MENU_ELEMENTS_HEIGHT)
   }
 

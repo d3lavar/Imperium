@@ -17,9 +17,12 @@ case class AreaPositioner(canvasWidth: Int,
                           verticalAlign: VerticalAlignment = VerticalAlignment.TOP,
                           horizontalAlign: HorizontalAlignment = HorizontalAlignment.LEFT) {
 
-  def buildArea(): Area = Area(calculateTopPoint(), areaWidth, areaHeight)
+  if (canvasWidth < 0) throw new IllegalArgumentException("Canvas width only accepts positive integers.")
+  if (canvasHeight < 0) throw new IllegalArgumentException("Canvas height only accepts positive integers.")
 
-  def buildTopPoint(): Point = calculateTopPoint()
+  lazy val area: Area = Area(calculateTopPoint(), areaWidth, areaHeight)
+
+  lazy val topPoint: Point = calculateTopPoint()
 
   private def calculateTopPoint(): Point = {
     var topPointX = -1
