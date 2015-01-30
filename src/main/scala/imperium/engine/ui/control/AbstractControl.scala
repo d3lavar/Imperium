@@ -21,6 +21,4 @@ abstract class AbstractControl(val area: Area, val action: (StateBasedGame) => U
     isActive = false
   }
 
-
-
 }

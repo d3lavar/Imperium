@@ -6,7 +6,7 @@ import org.scalatest.{FlatSpec, Matchers}
  */
 class AreaPositionerSpec extends FlatSpec with Matchers {
 
-  it should "cannot be initialized with invalid canvas size" in {
+  it should "not be initialized with invalid canvas size" in {
     a [IllegalArgumentException] should be thrownBy {
       AreaPositioner(0, -1)
     }
