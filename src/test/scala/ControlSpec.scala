@@ -1,15 +1,15 @@
-import imperium.engine.core.position.{AreaPositioner, Area}
+import imperium.engine.core.position.{Area, AreaPositioner}
 import imperium.engine.ui.control.AbstractControl
-import org.scalatest.{Matchers, FlatSpec}
+import org.scalatest.{FreeSpec, Matchers}
 
 /*
  * Created by DelavaR on 30.01.2015.
  */
-class ControlSpec extends FlatSpec with Matchers {
+class ControlSpec extends FreeSpec with Matchers {
 
   lazy val area = new Area(AreaPositioner(1, 1).topPoint, 1, 1)
 
-  it should "be active or not" in {
+  "it can be active or not" in {
     val control = new TestControl
     assert(!control.isActive)
     control.onHoverActivated()
@@ -18,16 +18,17 @@ class ControlSpec extends FlatSpec with Matchers {
     assert(!control.isActive)
   }
 
-  it should "have area" in {
+  "it can have area" in {
     val control = new TestControl
     assert(control.area == area)
   }
 
-  a [NotImplementedError] should be thrownBy {
-    val control = new TestControl
-    control.render()
+  "should produce NotImplementedError when render called" in {
+    intercept[NotImplementedError] {
+      val control = new TestControl
+      control.render()
+    }
   }
-
 
   class TestControl extends AbstractControl(area, (_) => Unit) {
     override def render(): Unit = ???
