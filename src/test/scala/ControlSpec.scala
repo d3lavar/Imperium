@@ -20,7 +20,7 @@ class ControlSpec extends FreeSpec with Matchers {
 
   "it can have area" in {
     val control = new TestControl
-    assert(control.area == area)
+    control.area should be(area)
   }
 
   "should produce NotImplementedError when render called" in {
