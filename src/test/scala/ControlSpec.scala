@@ -7,7 +7,7 @@ import org.scalatest.{FreeSpec, Matchers}
  */
 class ControlSpec extends FreeSpec with Matchers {
 
-  lazy val area = new Area(AreaPositioner(1, 1).topPoint, 1, 1)
+  lazy val _area = new Area(AreaPositioner(1, 1).topPoint, 1, 1)
 
   "it can be active or not" in new TestControl {
     isActive shouldBe false
@@ -18,7 +18,7 @@ class ControlSpec extends FreeSpec with Matchers {
   }
 
   "it can have area" in new TestControl {
-    area should be(area)
+    area should be(_area)
   }
 
   "should produce NotImplementedError when render called" in new TestControl {
@@ -27,7 +27,7 @@ class ControlSpec extends FreeSpec with Matchers {
     }
   }
 
-  class TestControl extends AbstractControl(area, (_) => Unit) {
+  class TestControl extends AbstractControl(_area, (_) => Unit) {
     override def render(): Unit = ???
   }
 
